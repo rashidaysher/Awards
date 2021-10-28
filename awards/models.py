@@ -28,4 +28,18 @@ class Project(models.Model):
     def save_project(self):
         self.save()
 
+    @classmethod
+    def search_by_name(cls,serach_term):
+
+        projects= cls.objects.filter(name__icontains=serach_term)\
+
+        return projects
+
+    def no_of_ratings(self):
+        ratings=Rating.objects.filter(project=self)
+        return len(ratings)
+
+    def __str__(self):
+        return self.name            
+
           
