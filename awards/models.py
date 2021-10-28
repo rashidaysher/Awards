@@ -10,3 +10,22 @@ class Profile(models.Model):
     bio = models.CharField(max_length= 300)
     email = models.EmailField()
     
+    def save_profile(self):
+        self.save()
+
+    def __str__(self):
+        return self.name
+
+
+class Project(models.Model):
+    webimage= models.ImageField(upload_to='webimage/',null=True)
+    profile = models.ForeignKey(Profile,on_delete=models.CASCADE, null=True)
+    name= models.CharField(max_length=70)
+    description= models.TextField()
+    link= models.CharField(max_length=200)
+
+
+    def save_project(self):
+        self.save()
+
+          
