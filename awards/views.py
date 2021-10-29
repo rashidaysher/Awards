@@ -58,3 +58,17 @@ def rate_project(request,id):
             rate.save()
             return  JsonResponse(request.path_info)
     
+        else:
+            form = RatingsForm()
+        params = {
+            'project': project,
+            'rating_form': form,
+            'rating_status': rating_status
+
+    } 
+    return render(request, 'awardss/project.html', params)
+
+@login_required(login_url='/accounts/login/') 
+def view_profile(request):
+    projects=request.user.profile.project_set.all() 
+    profile=request.user.profile    
