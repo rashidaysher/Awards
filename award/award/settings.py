@@ -38,11 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'awards',
-    # 'star_ratings',
-    # 'cloudinary_storage',
+    'award',
+    'cloudinay_storage',
     'rest_framework',
-    # 'bootsrap3',
+    
 ]
 
 MIDDLEWARE = [
