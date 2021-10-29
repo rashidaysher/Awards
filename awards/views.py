@@ -22,3 +22,8 @@ def home(request):
 @login_required(login_url='/accounts/login/') 
 def rate_project(request,id):
     project=Project.objects.get(id=id)
+
+    ratings = Rating.objects.filter(user=request.user, id=id).first()
+    rating_status = None
+    if ratings is None:
+        rating_status = False
