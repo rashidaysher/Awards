@@ -39,4 +39,22 @@ def rate_project(request,id):
             rate.project = project
             rate.save()
             project_ratings = Rating.objects.filter(id=id)
+
+            design_ratings = [d.design for d in project_ratings]
+            design_average = sum(design_ratings) / len(design_ratings)
+
+            usability_ratings = [us.usability for us in project_ratings]
+            usability_average = sum(usability_ratings) / len(usability_ratings)
+
+            content_ratings = [content.content for content in project_ratings]
+            content_average = sum(content_ratings) / len(content_ratings)
+
+            score = (design_average + usability_average + content_average) / 3
+            print(score)
+            rate.design_average = round(design_average, 2)
+            rate.usability_average = round(usability_average, 2)
+            rate.content_average = round(content_average, 2)
+            rate.score = round(score, 2)
+            rate.save()
+            return  JsonResponse(request.path_info)
     
