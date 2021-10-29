@@ -72,3 +72,15 @@ def rate_project(request,id):
 def view_profile(request):
     projects=request.user.profile.project_set.all() 
     profile=request.user.profile    
+
+    form=ProfileUpdateForm(instance=profile)
+
+    if request.method == 'POST':
+        form = ProfileUpdateForm(request.POST, request.FILES,instance=profile)
+        if form.is_valid():
+            form.save()
+    context={
+        'form':form,
+        'projects':projects,
+    }
+    return render(request,"awardss/profile.html",context=context)
