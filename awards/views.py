@@ -112,3 +112,36 @@ def search_project(request):
         message = "Please enter search name"
 
         return render(request, 'awardss/search.html',{"message":message})
+
+@login_required(login_url='/accounts/login/')     
+def new_project(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewProjectForm(request.POST, request.FILES)
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.user = current_user
+            project.save()
+        return redirect('home')
+        
+    else:
+        form = NewProjectForm()
+    return render(request, 'awardss/new_project.html', {"form":form, "current_user":current_user})
+
+@login_required(login_url='/accounts/login/')   
+def api_page(request):
+    return render(request,'awardss/api_page.html')
+
+
+class ProfileList(APIView):
+    def get(self, request, fromat=None):
+        all_profiles =Profile.objects.all()
+        serializers = ProfileSerializer(all_profiles, many=True)
+        return Response(serializers.data)
+
+
+class ProjectList(APIView):
+    def get(self, request, fromat=None):
+        all_projects =Project.objects.all()
+        serializers =ProjectSerializer(all_projects, many=True)
+        return Response(serializers.data)
