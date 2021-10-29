@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'award',
     'cloudinay_storage',
     'rest_framework',
+    'bootstrap5'
     
 ]
 
