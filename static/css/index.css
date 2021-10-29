@@ -1,0 +1,80 @@
+
+.navbar{
+    background-color: #FEFDFF;
+    padding-top: 5px;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 #535250;
+    transition: 0.3s;
+    border-radius: 5px;
+    margin-bottom: 20px;
+ 
+}
+
+.checked {
+    color: #4379ee;
+    transition: 0.3s;;
+}
+
+
+.card-text{
+    background-color: white;
+}
+  
+.card:hover {
+box-shadow: 0 8px 16px 0 #535250;
+}
+  
+img {
+border-radius: 5px 5px 0 0;
+}
+  
+
+.card-img-top {
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
+}
+  
+  /* The hero image */
+  .hero-image {
+  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1627398362552-6a029c1f583c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=940&q=80");
+  
+  /* Set a specific height */
+  height: 500px;
+  
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  padding-top: 300px;
+  opacity: 0.95;
+  }
+  
+
+
+  /* Place text in the middle of the image */
+  .hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+
+  }
+
+  body { 
+    padding-top: 110px;
+    background-color: #fbfbff; 
+
+}
+
+
+h1,h2,h3,h4{
+    color:#535250;
+}
+
