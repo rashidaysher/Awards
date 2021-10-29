@@ -84,3 +84,31 @@ def view_profile(request):
         'projects':projects,
     }
     return render(request,"awardss/profile.html",context=context)
+
+def register(request):
+    if request.method == 'POST':
+        username=request.POST['username']
+        email=request.POST['email']
+        password1=request.POST['password1']
+        password2=request.POST['password2']
+        user = User.objects.create_user(username=username,email=email,password=password1)
+        user.save()
+        profile=Profile.objects.create(user=user,email=user.email)
+        
+        return redirect('login')
+    else:
+        return render(request,'registration/registration_form.html')    
+
+@login_required(login_url='/accounts/login/') 
+def search_project(request):
+    if "project" in request.GET and request.GET["project"]:
+        search_term=request.GET.get("project")
+        searched_projects=Project.search_by_name(search_term)
+        message = f"{search_term}"
+
+        return render(request,'awardss/search.html',{"message":message, "projects":searched_projects, "project":search_term})
+    
+    else:
+        message = "Please enter search name"
+
+        return render(request, 'awardss/search.html',{"message":message})
