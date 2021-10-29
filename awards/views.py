@@ -18,3 +18,7 @@ from .serializer import ProfileSerializer,ProjectSerializer
 def home(request):
     projects= Project.objects.all()
     return render(request,'awardss/home.html', {'project':projects})
+
+@login_required(login_url='/accounts/login/') 
+def rate_project(request,id):
+    project=Project.objects.get(id=id)
