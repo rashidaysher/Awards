@@ -10,9 +10,11 @@ from django.contrib.auth import authenticate
 from rest_framework import status
 from rest_framework.response import Response
 from django.http import JsonResponse
-
 from rest_framework.views import APIView
 from .serializer import ProfileSerializer,ProjectSerializer
 
 
 # Create your views here.
+def home(request):
+    projects= Project.objects.all()
+    return render(request,'awardss/home.html', {'project':projects})
