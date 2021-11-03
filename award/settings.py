@@ -12,24 +12,18 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
-from decouple import config, Csv
-
-
-MODE=config("MODE", default="dev")
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=True, cast=bool)
-
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*!%%9*ca+ca7c2jeh$59r&@=4b031wj-j-!@n743fj+9%e&o#m'
+# SECRET_KEY = 'django-insecure-cmou6jj0y07h3(icjan#s-51%-d)iz_!s4_)-yk9%e5vdwe5_8'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -46,11 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms',
-    'award',
-    'cloudinay_storage',
+    'awards',
+    "bootstrap3",
     'rest_framework',
-    'bootstrap5'
+    'crispy_forms',
+    'star_ratings',
+    'cloudinary_storage'
+    
+    
+
     
 ]
 
@@ -91,10 +89,9 @@ WSGI_APPLICATION = 'award.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'award',
+        'NAME': 'awadee',
         'USER': 'moringa',
         'PASSWORD': 'password',
-
     }
 }
 
@@ -123,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Nairobi/Africa'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
@@ -141,14 +138,12 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 ) 
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -159,6 +154,9 @@ CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dnduhjuul',
     'API_KEY': '758142132227254',
     'API_SECRET': 'DUAe598cILMJIJ2_m_9pMOKUYTQ',
-    'secure': 'true',
+    'seCLOcure': 'true',
 }
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+django_heroku.settings(locals())
+

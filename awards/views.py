@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -10,14 +10,15 @@ from django.contrib.auth import authenticate
 from rest_framework import status
 from rest_framework.response import Response
 from django.http import JsonResponse
+
+
 from rest_framework.views import APIView
 from .serializer import ProfileSerializer,ProjectSerializer
 
-
 # Create your views here.
 def home(request):
-    projects= Project.objects.all()
-    return render(request,'awardss/home.html', {'project':projects})
+    projects=Project.objects.all()
+    return render(request,'awwards/home.html',{'projects':projects})
 
 @login_required(login_url='/accounts/login/') 
 def rate_project(request,id):
@@ -57,24 +58,25 @@ def rate_project(request,id):
             rate.score = round(score, 2)
             rate.save()
             return  JsonResponse(request.path_info)
-    
-        else:
-            form = RatingsForm()
-        params = {
-            'project': project,
-            'rating_form': form,
-            'rating_status': rating_status
+    else:
+        form = RatingsForm()
+    params = {
+        'project': project,
+        'rating_form': form,
+        'rating_status': rating_status
 
-    } 
-    return render(request, 'awardss/project.html', params)
+    }
+    return render(request, 'awwards/project.html', params)
+
+    # return render(request,"awwards/project.html",{"project":project})
 
 @login_required(login_url='/accounts/login/') 
 def view_profile(request):
     projects=request.user.profile.project_set.all() 
-    profile=request.user.profile    
-
+    profile=request.user.profile
+    
     form=ProfileUpdateForm(instance=profile)
-
+    
     if request.method == 'POST':
         form = ProfileUpdateForm(request.POST, request.FILES,instance=profile)
         if form.is_valid():
@@ -83,7 +85,8 @@ def view_profile(request):
         'form':form,
         'projects':projects,
     }
-    return render(request,"awardss/profile.html",context=context)
+    return render(request,"awwards/profile.html",context=context)
+
 
 def register(request):
     if request.method == 'POST':
@@ -97,7 +100,9 @@ def register(request):
         
         return redirect('login')
     else:
-        return render(request,'registration/registration_form.html')    
+        return render(request,'registration/registration_form.html')
+
+
 
 @login_required(login_url='/accounts/login/') 
 def search_project(request):
@@ -106,12 +111,12 @@ def search_project(request):
         searched_projects=Project.search_by_name(search_term)
         message = f"{search_term}"
 
-        return render(request,'awardss/search.html',{"message":message, "projects":searched_projects, "project":search_term})
+        return render(request,'awwards/search.html',{"message":message, "projects":searched_projects, "project":search_term})
     
     else:
         message = "Please enter search name"
 
-        return render(request, 'awardss/search.html',{"message":message})
+        return render(request, 'awwards/search.html',{"message":message})
 
 @login_required(login_url='/accounts/login/')     
 def new_project(request):
@@ -126,11 +131,11 @@ def new_project(request):
         
     else:
         form = NewProjectForm()
-    return render(request, 'awardss/new_project.html', {"form":form, "current_user":current_user})
-
+    return render(request, 'awwards/new_project.html', {"form":form, "current_user":current_user})
+    
 @login_required(login_url='/accounts/login/')   
 def api_page(request):
-    return render(request,'awardss/api_page.html')
+    return render(request,'awwards/api_page.html')
 
 
 class ProfileList(APIView):
@@ -145,3 +150,5 @@ class ProjectList(APIView):
         all_projects =Project.objects.all()
         serializers =ProjectSerializer(all_projects, many=True)
         return Response(serializers.data)
+
+

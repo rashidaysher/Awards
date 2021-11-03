@@ -4,7 +4,21 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
+Django = "*"
+django-rest-framework = "*"
+django-crispy-forms = "*"
+psycopg2-binary = "*"
+django-decouple = "*"
+csv-generator = "*"
+csv-converter = "*"
+python-decouple = "*"
+cloudinary = "*"
+Pillow = "*"
+django-bootstrap3 = "*"
+django-star-ratings = "*"
+django-cloudinary-storage = "*"
+django-heroku = "*"
+gunicorn = "*"
 
 [dev-packages]
 

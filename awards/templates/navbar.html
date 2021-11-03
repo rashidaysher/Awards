@@ -1,4 +1,4 @@
-{% load bootstrap5 %}
+{% load bootstrap3 %}
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -11,38 +11,45 @@
       </button>
       <a class="navbar-brand " href="/"><span style="font-family: 'Calistoga', cursive;font-size:30px;color:#3a3b3d;">The Awards</a>
       <a class="navbar-brand"  href="/"><span style="padding-right: 5px;font-weight: bold;margin-left:10px;color:#4379ee;">HOME</span></a>
-      <a class="navbar-brand"  href="/awwardsapi"><span style="font-weight: bolder;color:#4379ee;">GET ENDPOINTS</span></a>
+      <a class="navbar-brand"  href="/awwardsapi"><span style="font-weight: bolder;color:#4379ee;">DEVELOPER PAGE</span></a>
      
     </div>
-  
+    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
+      
+ 
+    <!-- search form end -->
+      <div class="container" >
+        {% if user.is_authenticated %}
+        <div class='navbar-right'style="padding: 20px;">
+          <span style="font-weight: bold;">
+          <div class="" role="menu">
+            <a href="/awwards/profile/{{user.id}}" style="color: #4379ee;"><img src="{{request.user.profile.profile_pic.url}}" alt="" width="40px" height="40px" style="border-radius: 50%;"></a>
+            <small style="padding-right: 10px;">Welcome  <a href="/awwards/profile/{{user.id}}" style="color: #4379ee;">{{user.username}}</a></small>
 
-        <div class="container" >
-            {% if user.is_authenticated %}
-            <div class='navbar-right'style="padding: 20px;">
-              <span style="font-weight: bold;">
-              <div class="" role="menu">
-                <a href="/awardss/profile/{{user.id}}" style="color: #4379ee;"><img src="{{request.user.profile.profile_pic.url}}" alt="" width="40px" height="40px" style="border-radius: 50%;"></a>
-                <small style="padding-right: 10px;">Welcome  <a href="/awwards/profile/{{user.id}}" style="color: #4379ee;">{{user.username}}</a></small>
-                <a class="btn btn-primary" style="border-radius: 25px;" href="/logout">Logout</a> 
-            </div>
-            </span>
-            {% else %}
-            <span style="font-weight: bold;">
-            <div class='navbar-right'style="padding: 20px;">
-                <small style="margin-right:10px">Already have an account?</small>
-                <a style="color: #4379ee; margin-right:10px" href="/accounts/login">Login</a>
-  
-                <a  class="btn btn-sm btn-info" style="border-radius: 25px;" href="{% url 'register' %}">Sign Up</a>
-            </div>
-            <div class='navbar-right'style="padding: 20px;">
-              
-            </div>
-            </span>
+            
+            
+            <a class="btn btn-primary" style="border-radius: 25px;" href="/logout">Logout</a> 
           </div>
-          {% endif %}
+          </span>
+            {% else %}
+          <span style="font-weight: bold;">
+          <div class='navbar-right'style="padding: 20px;">
+              <small style="margin-right:10px">Are you a member?</small>
+              <a style="color: #4379ee; margin-right:10px" href="/accounts/login">Login</a>
+
+              <a  class="btn btn-sm btn-info" style="border-radius: 25px;" href="{% url 'register' %}">Sign Up</a>
+          </div>
+          <div class='navbar-right'style="padding: 20px;">
+            
+          </div>
+          </span>
         </div>
+        {% endif %}
       </div>
     </div>
-  
-  </nav>
+  </div>
+
+</nav>
+
+
