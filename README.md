@@ -2,7 +2,7 @@
 The Awards app
 
 ## Author   
->[Aisha Rashid](https://github.com/Michael-Otieno)  
+>[Aisha Rashid](https://github.com/rashidaysher)  
   
 # Description  
 This is a awards application built with django.
@@ -10,7 +10,7 @@ A user can post their projects, rate other people's projects, comment on it, Pos
 The end points on the Develpoer's page can be used by the user.
   
 ##  Live Link  
- Click [View Site](https://awardsweb.herokuapp.com/)  to visit the site
+ Click [View Site](https://awards-3590.herokuapp.com/)  to visit the site
 
 ## MVPs  
 * View different photos posted by other users
